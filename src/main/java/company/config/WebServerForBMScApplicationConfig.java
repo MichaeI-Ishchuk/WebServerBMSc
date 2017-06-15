@@ -31,12 +31,4 @@ public class WebServerForBMScApplicationConfig extends WebMvcConfigurerAdapter {
 
     }
 
-//    @Override
-//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-//
-//        Jackson2ObjectMapperBuilder builder = Jackson2ObjectMapperBuilder.xml();
-//               builder.indentOutput(true);
-//        converters.add(new MappingJackson2XmlHttpMessageConverter(builder.build()));
-
-//    }
 }

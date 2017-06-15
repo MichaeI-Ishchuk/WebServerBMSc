@@ -21,42 +21,40 @@ import java.util.regex.Pattern;
 @Service
 public class MessageService {
 
-   @Autowired
+    @Autowired
     private ResourceLoader resourceLoader;
-    @Scheduled(fixedDelay = 300000)
+     @Scheduled(initialDelay =0, fixedDelay = 300000)
     public List<MessageDTO> getAllMessages() throws IOException {
 
-        List<MessageDTO> list =new ArrayList<>();
-
-        try(FileReader fileReader =new FileReader(resourceLoader.getResource("classpath:log.txt").getFile());
+        List<MessageDTO> list = new ArrayList<>();
+          try (FileReader fileReader = new FileReader(resourceLoader.getResource("classpath:log.txt").getFile());
                 BufferedReader reader = new BufferedReader(fileReader);
 
         )
 
-        {  StringBuilder sb = new StringBuilder();
-            String text =reader.readLine();
-            while (text!=null)
+        {
+            StringBuilder sb = new StringBuilder();
+            String text = reader.readLine();
+            while (text != null)
 
             {
 
                 sb.append(text);
 
-                text=reader.readLine();
+                text = reader.readLine();
 
             }
             sb.append("END");
 
-            Pattern p = Pattern.compile("\\d{8}\\.\\d{3} \\|\\d{2}:\\d{2}:\\d{2}.\\d+ \\|(?:SdlSig|Stopping).*?(?=\\d{8}\\.|END)");
+            Pattern p = Pattern
+                    .compile("\\d{8}\\.\\d{3} \\|\\d{2}:\\d{2}:\\d{2}.\\d+ \\|(?:SdlSig|Stopping).*?(?=\\d{8}\\.|END)");
             Matcher m = p.matcher(sb);
 
             while (m.find()) {
 
-                String array []=  m.group().split("\\|");
-
-                System.out.println(array.length+"//////////////");
+                String array[] = m.group().split("\\|");
 
                 MessageDTO messageDTO = new MessageDTO();
-
                 messageDTO.setNumber(array[0]);
                 messageDTO.setTime(array[1]);
                 messageDTO.setMessageType(array[2]);
@@ -70,20 +68,13 @@ public class MessageService {
 
             }
 
-        }catch (FileNotFoundException e){}
+        } catch (FileNotFoundException e) {
+        }
 
-        System.out.println(list.size()+"///////////////////");
-        return list;
-
+return list;
     }
 
-
-
-
-
-
-
-
-
-
 }
+
+
+

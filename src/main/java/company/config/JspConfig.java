@@ -12,9 +12,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 public class JspConfig {
     @Bean
-    /**
-     *  где брать jsp-файлы
-     */
+
     public InternalResourceViewResolver getViewResolver(){
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/jsp/");
